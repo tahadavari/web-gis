@@ -1,0 +1,243 @@
+
+*{
+    font-family:'B Nazanin';
+    font-size:15px;
+}
+
+#logoutBtn {
+    top:15px;
+    right:15px;
+    background-image: url('logout.svg');
+}
+
+
+#loginBtn {
+    top:15px;
+    right:15px;
+    background-image: url('login.svg');
+}
+
+.icon-top-right {
+    width:70px;
+    height:70px;
+    position:absolute;
+    z-index:999;
+    background-color:#103c67;
+    background-size:35px;
+    background-position:center;
+    background-repeat:no-repeat;
+    border:none;
+
+}
+
+    .icon-top-right:hover {
+            background-color:#1e5d9a;
+    }
+
+
+
+#loginDiv, #logoutDiv{
+	display: none;
+	text-align: right
+}
+
+.ui-dialog { z-index: 1200 !important ;}
+#mousePosition{
+    padding:10px;
+    background-color:#103c67;
+    opacity:.8;
+    position:absolute;
+    width:180px;
+    height:35px;
+    bottom:5px;
+    left:45%;
+    z-index:1000;
+    color:white
+}
+
+#identifyBtn{
+    top:90px;
+    right:15px;
+    background-image: url('information.svg');
+}
+
+#searchBox {
+    position:absolute;
+    top:15px;
+    right:163px;
+    width:37%;
+    height:36px;
+    padding:1%;
+    margin:0px;
+    text-align:right;
+    box-shadow: 0px 2px 1px #787878;
+    padding-right:30px;
+    z-index:999;
+    border:1px solid black;
+
+}
+
+
+
+
+#searchBtn {
+    top:15px;
+    right:89px;
+    background-image: url('search.svg');
+}
+
+
+#measurBtn{
+    top:165px;
+    right:15px;
+    background-image: url('ruler.svg');
+}
+
+
+
+
+.pargraphes{
+    font-weight:bold;
+    font-size:14px;
+}
+#measurRes{
+    display:none;
+    padding:10px;
+    background-color:#81a4c7;
+    opacity:.7;
+    position:absolute;
+    width:170px;
+    height:200px;
+    bottom:120px;
+    right:25px;
+    z-index:1000;
+    color:white
+}
+
+#DrawEndBtn{
+    display:normal;
+    width:100px;
+    height:30px;
+    position:absolute;
+    bottom:5px;
+    left:40%
+}
+
+
+
+
+#drawingBtn{
+    top:315px;
+    right:15px;
+    background-image: url('pencil-edit-button.svg');
+}
+
+#PointDrawingBtn{
+    top:315px;
+    right:90px;
+    background-image: url('pin.svg');
+    display:none;
+}
+
+#LineDrawingBtn{
+    top:390px;
+    right:15px;
+    background-image: url('polyline.svg');
+    display:none;
+}
+
+
+#PolygonDrawingBtn{
+    top:390px;
+    right:90px;
+    background-image: url('polygonal-chart-of-triangles.svg');
+    display:none;
+
+}
+
+#AcceptDrawingBtn{
+    top:465px;
+    right:15px;
+    background-image: url('tick.svg');
+    background-color:#10671c;
+    display:none;
+
+}
+
+#CancelDrawingBtn{
+    top:465px;
+    right:90px;
+    background-image: url('trash.svg');
+    background-color:#761c19;
+    display:none;
+}
+
+
+#syncToDBBtn{
+    top:240px;
+    right:15px;
+    background-image: url('sync.svg');
+    background-color:#761c19;
+}
+
+
+
+#layer-switcher{
+    height: 100vh;
+
+}
+#layer-switcher{
+    display:none;
+    background-color:white;
+    width:320px;
+    padding-top:100px;
+    padding-left:10px;
+    padding-bottom:100px;
+    padding-right:10px;
+    box-shadow: 6px 6px 5px #787878;
+
+}
+#layer-switcher, #layer-switcher-activator, #layer-switcher-deactivator {
+    position:fixed;
+    z-index:1000;
+}
+
+#layer-switcher-activator{
+    width:70px;
+    height:70px;
+    z-index:1001;
+    position:fixed;
+    padding:0;
+    border:none;
+    margin:15px;
+    background-color:#103c67;
+    -webkit-mask-image: url('layers-svgrepo-com.svg');
+    background-size:contain;
+}
+    #layer-switcher-activator:hover{
+            background-color:#1e5d9a;
+    }
+
+#layer-switcher-deactivator {
+    z-index:1001;
+    position:fixed;
+    padding:0;
+    border:none;
+    margin:30px;
+    width:40px;
+    height:40px;
+    background-image: url('multiply.svg');
+    background-size:contain;
+    background-color:white;
+    display:none;
+
+
+}
+#layers{
+    height: 100vh;
+    width:300px;
+    overflow:scroll;
+}
+
+
+

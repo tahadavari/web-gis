@@ -1,16 +1,146 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    {% load static %}
+    <script src="{% static "js/OpenLayers.js" %}"></script>
+    <script src="{% static "js/jquery-3.3.1.min.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "style.css" %}"/>
+
+
+    <script src="{% static "js/jquery-ui-1.12.1.custom/jquery-ui.min.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "js/jquery-ui-1.12.1.custom/jquery-ui.min.css" %}" />
+
+
+
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="{% static 'GIS/js/OpenLayers.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'landing/css/landing.css' %}">
+    <title>وب GIS</title>
+    <style>
+        #map{
+            height: 100vh;
+        }
+
+
+    </style>
 </head>
 <body>
-<div id="Map">
 
-</div>
-<script src="{% static 'landing/js/landing.js' %}"></script>
+    <div id="layer-switcher">
+        <hr />
+        <div dir="RTL" id="layers">
+        </div>
+    </div>
+
+
+
+    <button id="layer-switcher-activator"></button>
+    <button id="layer-switcher-deactivator"></button>
+
+
+
+<div id="map"></div>
+
+{% if user.is_authenticated %}
+    <button id="logoutBtn" class="icon-top-right"></button>
+{% else %}
+    <button id="loginBtn" class="icon-top-right"></button>
+{% endif %}
+
+
+
+    <div id="logoutDiv" title="خروج">
+            <p> آیا قصد خروج دارید؟</p>
+    </div>
+
+
+   <div id="loginDiv" title="ورود به سیستم">
+                <form id="loginForm" action="http://127.0.0.1:8000/login/" method="post">
+                    نام کاربری</br><input type="text" name="username"/></br>
+                    کلمه عبور</br><input type="password" name="password"/>
+                </form>
+    </div>
+
+    <div id="mousePosition">
+
+    </div>
+
+
+{% if user.is_authenticated %}
+    <button id="identifyBtn" class="icon-top-right"></button>
+    <button id="measurBtn" class="icon-top-right"></button>
+
+    <button id="drawingBtn" class="icon-top-right"></button>
+    <button id="PointDrawingBtn" class="icon-top-right"></button>
+    <button id="LineDrawingBtn" class="icon-top-right"></button>
+    <button id="PolygonDrawingBtn" class="icon-top-right"></button>
+    <button id="AcceptDrawingBtn" class="icon-top-right"></button>
+    <button id="CancelDrawingBtn" class="icon-top-right"></button>
+    <button id="syncToDBBtn" class="icon-top-right"></button>
+
+
+{% endif %}
+
+    <div id="identifyOptionPopup" style="display: none;text-align: right" title="Identify">
+            <p>یک لایه را برای شروع آیدینتیفای انتخاب کنید</p>
+        <div>
+
+            <select id ="layerChooseToIdentify">
+            </select>
+
+        </div>
+    </div>
+
+<div id="popup-identify"></div>
+
+
+
+{% if user.is_authenticated %}
+    <button id="searchBtn" class="icon-top-right"></button>
+    <input type="text" id="searchBox" pattern="[A-Za-z0-9]{1,20}"  />
+{% endif %}
+
+
+
+    <div id="measurDiv" style="display: none;text-align: right" title="تنظیمات اندازه گیری">
+            <p class="pargraphes">پارامتر اندازه گیری</p>
+
+            <form>
+                <input type="radio" id="distanceCheckBox" name="mesureCheckBox"
+                       value="distanceCheckBox" checked />
+                <label for="distanceCheckBox">طول</label>
+                <input type="radio" id="areaCheckBox" name="mesureCheckBox"
+                       value="areaCheckBox" />
+                <label for="areaCheckBox">مساحت</label>
+            </form>
+
+            <p class="pargraphes">واحد اندازه گیری</p>
+            <select>
+                <option value="meter">متر</option>
+            </select>
+
+            <p class="pargraphes">سیستم تصویر</p>
+            <select>
+                <option value="UTM">UTM</option>
+                <option value="Mercator">Mercator</option>
+            </select>
+    </div>
+
+
+
+    <div id="measurRes">
+        <div id="measurResInner"></div>
+        <button id="DrawEndBtn">پایان اندازه گیری</button>
+    </div>
+
+
+   <div id="syncToDBDiv" style="display: none;text-align: right" title="همگام سازی با دیتابیس">
+            <p> با همگام سازی، همه ی ترسیمات به صورتی که در حال حاضر در حال نمایش اند در دیتابیس ذخیره میشود. ممکن است دیتای جدید حذف شود یا اضافه شود</p>
+            <p style="color:#ac2925;font-weight: bold;">قبل از این کار میتوانید از ترسیمات موجود خروجی شیپ فایل تهیه کنید</p>
+    </div>
+
+    <div id="successfullSyncToDB" title="نتیجه همگام سازی"></div>
+
+
+
+<script src="{% static "map.js" %}"></script>
 </body>
 </html>

@@ -1,7 +1,10 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+
+from GIS.models import Layer
 
 
 def landing(request):
@@ -41,3 +44,12 @@ def register_user(request):
 def logout_user(request):
     logout(request)
     return render(request, 'authentication/login.html')
+
+
+def get_wms(request):
+    if request.user.is_authenticated:
+        user_layers = Layer.objects.filter(user_owner=request.user)
+        response = serializers.serialize('json',user_layers)
+    else:
+        response = ''
+    return HttpResponse(response)
