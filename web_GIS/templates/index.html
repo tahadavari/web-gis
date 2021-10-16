@@ -8,14 +8,13 @@
 
 
     <script src="{% static "js/jquery-ui-1.12.1.custom/jquery-ui.min.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static "js/jquery-ui-1.12.1.custom/jquery-ui.min.css" %}" />
-
+    <link rel="stylesheet" href="{% static "js/jquery-ui-1.12.1.custom/jquery-ui.min.css" %}"/>
 
 
     <meta charset="UTF-8">
     <title>وب GIS</title>
     <style>
-        #map{
+        #map {
             height: 100vh;
         }
 
@@ -24,17 +23,15 @@
 </head>
 <body>
 
-    <div id="layer-switcher">
-        <hr />
-        <div dir="RTL" id="layers">
-        </div>
+<div id="layer-switcher">
+    <hr/>
+    <div dir="RTL" id="layers">
     </div>
+</div>
 
 
-
-    <button id="layer-switcher-activator"></button>
-    <button id="layer-switcher-deactivator"></button>
-
+<button id="layer-switcher-activator"></button>
+<button id="layer-switcher-deactivator"></button>
 
 
 <div id="map"></div>
@@ -47,21 +44,21 @@
 
 
 
-    <div id="logoutDiv" title="خروج">
-            <p> آیا قصد خروج دارید؟</p>
-    </div>
+<div id="logoutDiv" title="خروج">
+    <p> آیا قصد خروج دارید؟</p>
+</div>
 
 
-   <div id="loginDiv" title="ورود به سیستم">
-                <form id="loginForm" action="http://127.0.0.1:8000/login/" method="post">
-                    نام کاربری</br><input type="text" name="username"/></br>
-                    کلمه عبور</br><input type="password" name="password"/>
-                </form>
-    </div>
+<div id="loginDiv" title="ورود به سیستم">
+    <form id="loginForm" action="http://127.0.0.1:8000/login/" method="post">
+        نام کاربری</br><input type="text" name="username"/></br>
+        کلمه عبور</br><input type="password" name="password"/>
+    </form>
+</div>
 
-    <div id="mousePosition">
+<div id="mousePosition">
 
-    </div>
+</div>
 
 
 {% if user.is_authenticated %}
@@ -79,15 +76,15 @@
 
 {% endif %}
 
-    <div id="identifyOptionPopup" style="display: none;text-align: right" title="Identify">
-            <p>یک لایه را برای شروع آیدینتیفای انتخاب کنید</p>
-        <div>
+<div id="identifyOptionPopup" style="display: none;text-align: right" title="Identify">
+    <p>یک لایه را برای شروع آیدینتیفای انتخاب کنید</p>
+    <div>
 
-            <select id ="layerChooseToIdentify">
-            </select>
+        <select id="layerChooseToIdentify">
+        </select>
 
-        </div>
     </div>
+</div>
 
 <div id="popup-identify"></div>
 
@@ -95,50 +92,49 @@
 
 {% if user.is_authenticated %}
     <button id="searchBtn" class="icon-top-right"></button>
-    <input type="text" id="searchBox" pattern="[A-Za-z0-9]{1,20}"  />
+    <input type="text" id="searchBox" pattern="[A-Za-z0-9]{1,20}"/>
 {% endif %}
 
 
 
-    <div id="measurDiv" style="display: none;text-align: right" title="تنظیمات اندازه گیری">
-            <p class="pargraphes">پارامتر اندازه گیری</p>
+<div id="measurDiv" style="display: none;text-align: right" title="تنظیمات اندازه گیری">
+    <p class="pargraphes">پارامتر اندازه گیری</p>
 
-            <form>
-                <input type="radio" id="distanceCheckBox" name="mesureCheckBox"
-                       value="distanceCheckBox" checked />
-                <label for="distanceCheckBox">طول</label>
-                <input type="radio" id="areaCheckBox" name="mesureCheckBox"
-                       value="areaCheckBox" />
-                <label for="areaCheckBox">مساحت</label>
-            </form>
+    <form>
+        <input type="radio" id="distanceCheckBox" name="mesureCheckBox"
+               value="distanceCheckBox" checked/>
+        <label for="distanceCheckBox">طول</label>
+        <input type="radio" id="areaCheckBox" name="mesureCheckBox"
+               value="areaCheckBox"/>
+        <label for="areaCheckBox">مساحت</label>
+    </form>
 
-            <p class="pargraphes">واحد اندازه گیری</p>
-            <select>
-                <option value="meter">متر</option>
-            </select>
+    <p class="pargraphes">واحد اندازه گیری</p>
+    <select>
+        <option value="meter">متر</option>
+    </select>
 
-            <p class="pargraphes">سیستم تصویر</p>
-            <select>
-                <option value="UTM">UTM</option>
-                <option value="Mercator">Mercator</option>
-            </select>
-    </div>
-
-
-
-    <div id="measurRes">
-        <div id="measurResInner"></div>
-        <button id="DrawEndBtn">پایان اندازه گیری</button>
-    </div>
+    <p class="pargraphes">سیستم تصویر</p>
+    <select>
+        <option value="UTM">UTM</option>
+        <option value="Mercator">Mercator</option>
+    </select>
+</div>
 
 
-   <div id="syncToDBDiv" style="display: none;text-align: right" title="همگام سازی با دیتابیس">
-            <p> با همگام سازی، همه ی ترسیمات به صورتی که در حال حاضر در حال نمایش اند در دیتابیس ذخیره میشود. ممکن است دیتای جدید حذف شود یا اضافه شود</p>
-            <p style="color:#ac2925;font-weight: bold;">قبل از این کار میتوانید از ترسیمات موجود خروجی شیپ فایل تهیه کنید</p>
-    </div>
+<div id="measurRes">
+    <div id="measurResInner"></div>
+    <button id="DrawEndBtn">پایان اندازه گیری</button>
+</div>
 
-    <div id="successfullSyncToDB" title="نتیجه همگام سازی"></div>
 
+<div id="syncToDBDiv" style="display: none;text-align: right" title="همگام سازی با دیتابیس">
+    <p> با همگام سازی، همه ی ترسیمات به صورتی که در حال حاضر در حال نمایش اند در دیتابیس ذخیره میشود. ممکن است دیتای
+        جدید حذف شود یا اضافه شود</p>
+    <p style="color:#ac2925;font-weight: bold;">قبل از این کار میتوانید از ترسیمات موجود خروجی شیپ فایل تهیه کنید</p>
+</div>
+
+<div id="successfullSyncToDB" title="نتیجه همگام سازی"></div>
 
 
 <script src="{% static "map.js" %}"></script>

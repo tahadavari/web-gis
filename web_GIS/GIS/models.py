@@ -12,3 +12,11 @@ class Layer(models.Model):
     def __str__(self):
         return f'{self.layer_alias} : {self.workspace} : {self.layer_name} : {self.server_address}'
 
+
+# class Drawing(models.Model):
+#     geomId = models.AutoField(primary_key=True)
+#     geom = models.GeometryField()
+#     userOwner = models.ManyToManyField(User)
+#
+#     def __str__(self):
+#         return str(self.geom)

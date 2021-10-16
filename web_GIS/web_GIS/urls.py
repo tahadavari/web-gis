@@ -16,13 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from GIS.views import logout_user, login_user, register_user, landing,get_wms
+from GIS.views import logout_user, login_user, register_user, landing, getwms, identify
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',landing,name='landing'),
+    path('', landing, name='landing'),
     path('login/', login_user, name='login'),
     path('register/', register_user, name='register'),
     path('logout/', logout_user, name='logout'),
-    path('get-wms/',get_wms,name='get_wms')
+    path('getwms/', getwms, name='get_wms'),
+    path('identify/', identify,name='identify'),
+    # path('search/', search,name='search'),
+    # path('getdrawings/', getDrawings, name='getdrawings'),
+    # path('synctodb/', syncToDatabase, name='synctodb'),
+    # path('exportshp/', exportSHP, name='exportshp'),
 ]
