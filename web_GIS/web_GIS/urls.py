@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from GIS.views import login
+from GIS.views import logout_user, login_user, register_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',login,name='login')
+    path('login/', login_user, name='login'),
+    path('register/', register_user, name='register'),
+    path('logout/', logout_user, name='logout')
 ]

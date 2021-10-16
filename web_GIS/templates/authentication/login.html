@@ -1,75 +1,78 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Login</title>
-    <link rel="stylesheet" href="{% static 'authentication/css/login.css' %}" />
-  </head>
-  <body>
-    <div class="form-structor">
-      <div class="login">
+    <link rel="stylesheet" href="{% static 'authentication/css/login.css' %}"/>
+</head>
+<body>
+<div class="form-structor">
+    <div class="login">
         <h2 class="form-title" id="login">Login</h2>
-        <div class="form-holder">
-          <input type="email" class="input" placeholder="Email/Phone/Username" />
-          <input type="password" class="input" placeholder="Password" />
-        </div>
-        <button class='forget-pass'>Forget pass?</button>
-        <button class="submit-btn">LOGIN</button>
-        <button class="submit-btn">SINGUP NOW</button>
-      </div>
-      <div class="otp slide-up">
-        <div class="center">
-          <h2 class="form-title" id="otp">Login with SMS</h2>
-          <div class="form-holder">
-            <form class="otc" name="one-time-code" action="#">
-              <div>
-                <input
-                  type="number"
-                  pattern="[0-9]*"
-                  value=""
-                  inputtype="numeric"
-                  autocomplete="one-time-code"
-                  id="otc-1"
-                  required
-                />
-                <input
-                  type="number"
-                  pattern="[0-9]*"
-                  value=""
-                  inputtype="numeric"
-                  id="otc-2"
-                  required
-                />
-                <input
-                  type="number"
-                  pattern="[0-9]*"
-                  value=""
-                  inputtype="numeric"
-                  id="otc-3"
-                  required
-                />
-                <input
-                  type="number"
-                  pattern="[0-9]*"
-                  value=""
-                  inputtype="numeric"
-                  id="otc-4"
-                  required
-                />
-              </div>
-            </form>
-          </div>
-          <button class="submit-btn">LOGIN</button>
-          <div class="send-code">
-            <button class="send-code-btn">Send code again</button>
-            <div class = 'send-code-timer'><span id="timer"></span></div>
-          </div>
-          
-        </div>
-      </div>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-holder">
+                <input name="username" type="text" class="input" placeholder="Phone"/>
+                <input name="password" type="password" class="input" placeholder="Password"/>
+            </div>
+            <button class='forget-pass'>Forget pass?</button>
+            <button type="submit" class="submit-btn">LOGIN</button>
+            <button class="submit-btn">SINGUP NOW</button>
+        </form>
     </div>
-    <!-- partial -->
-    <script src="{% static 'authentication/js/login.js' %}"></script>
-  </body>
+    <div class="otp slide-up">
+        <div class="center">
+            {#          <h2 class="form-title" id="otp">Login with SMS</h2>#}
+            <div class="form-holder">
+                <form class="otc" name="one-time-code" action="#">
+                    <div>
+                        <input
+                                type="number"
+                                pattern="[0-9]*"
+                                value=""
+                                inputtype="numeric"
+                                autocomplete="one-time-code"
+                                id="otc-1"
+                                required
+                        />
+                        <input
+                                type="number"
+                                pattern="[0-9]*"
+                                value=""
+                                inputtype="numeric"
+                                id="otc-2"
+                                required
+                        />
+                        <input
+                                type="number"
+                                pattern="[0-9]*"
+                                value=""
+                                inputtype="numeric"
+                                id="otc-3"
+                                required
+                        />
+                        <input
+                                type="number"
+                                pattern="[0-9]*"
+                                value=""
+                                inputtype="numeric"
+                                id="otc-4"
+                                required
+                        />
+                    </div>
+                </form>
+            </div>
+            <button class="submit-btn">LOGIN</button>
+            <div class="send-code">
+                <button class="send-code-btn">Send code again</button>
+                <div class='send-code-timer'><span id="timer"></span></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- partial -->
+<script src="{% static 'authentication/js/login.js' %}"></script>
+</body>
 </html>
