@@ -1,3 +1,7 @@
+wms = new OpenLayers.Layer.WMS("لایه نقطه ای ایران",
+    "http://localhost:8080/geoserver/wms",
+    {LAYERS: 'python:iran_location', transparent: true},
+    {isBaseLayer: false});
 map = new OpenLayers.Map("Map", {
     projection: new OpenLayers.Projection("EPSG:900913"),
     controls: [new OpenLayers.Control.Navigation()]
@@ -18,7 +22,9 @@ hybrid = new OpenLayers.Layer.Bing({
     name: "Bing Aerial With Labels"
 });
 
-map.addLayers([osmLayer, road, aerial, hybrid]);
+map.addLayers([osmLayer, road, aerial, hybrid,wms]);
+
+
 
 map.setCenter([0, 0], 1)
 
