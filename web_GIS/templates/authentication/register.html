@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'authentication/css/register.css' %}" />
+  </head>
+  <body>
+    <div class="form-structor">
+      <div class="login">
+        <h2 class="form-title" id="login">REGISTER</h2>
+        <div class="form-holder">
+          <input type="text" class="input" placeholder="First Name" />
+          <input type="text" class="input" placeholder="Last Name" />
+          <input type="phone" class="input" placeholder="Phone" />
+          <input type="email" class="input" placeholder="Email" />
+          <input type="password" class="input" placeholder="Password" />
+          <input type="password" class="input" placeholder="Password Confirm" />
+        </div>
+        <button class="submit-btn" id='register'>REGISTER</button>
+      </div>
+      <div class="otp slide-up">
+        <div class="center">
+          <h2 class="form-title" id="otp"></h2>
+          <div class="form-holder">
+            <form class="otc" name="one-time-code" action="#">
+              <div>
+                <input
+                  type="number"
+                  pattern="[0-9]*"
+                  value=""
+                  inputtype="numeric"
+                  autocomplete="one-time-code"
+                  id="otc-1"
+                  required
+                />
+                <input
+                  type="number"
+                  pattern="[0-9]*"
+                  value=""
+                  inputtype="numeric"
+                  id="otc-2"
+                  required
+                />
+                <input
+                  type="number"
+                  pattern="[0-9]*"
+                  value=""
+                  inputtype="numeric"
+                  id="otc-3"
+                  required
+                />
+                <input
+                  type="number"
+                  pattern="[0-9]*"
+                  value=""
+                  inputtype="numeric"
+                  id="otc-4"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="send-code">
+            <button class="send-code-btn">Send code again</button>
+            <div class = 'send-code-timer'><span id="timer"></span></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- partial -->
+    <script src="{% static 'authentication/js/register.js' %}"></script>
+  </body>
+</html>
