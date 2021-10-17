@@ -2,17 +2,17 @@ import json
 # import os
 # import shutil
 # import uuid
-
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
-from django.contrib.sites import requests
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 # from django.contrib.gis.geos import GEOSGeometry
 # from osgeo import ogr, osr
 
-from GIS.models import Layer
+from GIS.models import Layer, Drawing
+import requests
 
 
 def landing(request):
@@ -54,6 +54,7 @@ def logout_user(request):
     return render(request, 'authentication/login.html')
 
 
+@csrf_exempt
 def getwms(request):
     if request.user.is_authenticated:
         user_layers = Layer.objects.filter(user_owner=request.user)
@@ -63,10 +64,10 @@ def getwms(request):
     return HttpResponse(response)
 
 
+@csrf_exempt
 def identify(request):
     if request.user.is_authenticated:
         data = json.load(request)
-        print(data)
         SERVER = "http://127.0.0.1:8080/geoserver"
         SERVICE = "wms"
         VERSION = "1.1.1"
@@ -98,44 +99,45 @@ def identify(request):
         return HttpResponse("Access Denied. Error403", content_type="text/html")
 
 
-# def search(request):
-#     if request.user.is_authenticated:
-#         data = json.load(request)
-#
-#         SERVER = "http://127.0.0.1:8080/geoserver"
-#         SERVICE = "wfs"
-#         VERSION = "2.0.0"
-#         REQUEST = "getfeature"
-#         OUTPUTFORMAT = 'application/json'
-#         query = data['q']
-#         layer = data['layer']
-#         workspace = data['workspace']
-#         typeName = workspace + ":" + layer
-#         CQL_FILTER = "NAME='" + query + "'"
-#
-#         url_request = SERVER + "/" + SERVICE + "?" + "SERVICE=" + SERVICE + "&VERSION=" + VERSION + \
-#                       "&REQUEST=" + REQUEST + "&OUTPUTFORMAT=" + OUTPUTFORMAT + "&typeName=" + typeName + \
-#                       "&CQL_FILTER=" + CQL_FILTER
-#
-#         UserOwnersOfLayer = Layer.objects.filter(layer_name=layer).values_list("userOwner", flat=True)
-#         if request.user.id in UserOwnersOfLayer:
-#             resJSON = requests.get(url_request)
-#         else:
-#             resJSON = "Access Denied. Eror403!"
-#
-#         return HttpResponse(resJSON, content_type='text/html')
-#     else:
-#         return HttpResponse("Access Denied. Eror403", content_type='text/html')
-#
-#
-# def getDrawings(request):
-#     if request.user.is_authenticated:
-#         drawingobjs = Drawing.objects.filter(userOwner=request.user)
-#
-#         drawingobjsJSON = serializers.serialize('geojson', drawingobjs)
-#         return HttpResponse(drawingobjsJSON, content_type='text/html')
-#     else:
-#         return HttpResponse("Access Denied. Eror403", content_type='text/html')
+@csrf_exempt
+def search(request):
+    if request.user.is_authenticated:
+        data = json.load(request)
+
+        SERVER = "http://127.0.0.1:8080/geoserver"
+        SERVICE = "wfs"
+        VERSION = "2.0.0"
+        REQUEST = "getfeature"
+        OUTPUTFORMAT = 'application/json'
+        query = data['q']
+        layer = data['layer']
+        workspace = data['workspace']
+        typeName = workspace + ":" + layer
+        CQL_FILTER = "NAME='" + query + "'"
+
+        url_request = SERVER + "/" + SERVICE + "?" + "SERVICE=" + SERVICE + "&VERSION=" + VERSION + \
+                      "&REQUEST=" + REQUEST + "&OUTPUTFORMAT=" + OUTPUTFORMAT + "&typeName=" + typeName + \
+                      "&CQL_FILTER=" + CQL_FILTER
+
+        UserOwnersOfLayer = Layer.objects.filter(layer_name=layer).values_list("user_owner", flat=True)
+        if request.user.id in UserOwnersOfLayer:
+            resJSON = requests.get(url_request)
+        else:
+            resJSON = "Access Denied. Error403!"
+
+        return HttpResponse(resJSON, content_type='text/html')
+    else:
+        return HttpResponse("Access Denied. Error403", content_type='text/html')
+
+
+def getDrawings(request):
+    if request.user.is_authenticated:
+        drawingobjs = Drawing.objects.filter(userOwner=request.user)
+
+        drawingobjsJSON = serializers.serialize('geojson', drawingobjs)
+        return HttpResponse(drawingobjsJSON, content_type='text/html')
+    else:
+        return HttpResponse("Access Denied. Error403", content_type='text/html')
 #
 #
 # def syncToDatabase(request):

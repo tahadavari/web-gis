@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from GIS.views import logout_user, login_user, register_user, landing, getwms, identify
+from GIS.views import logout_user, login_user, register_user, landing, getwms, identify, search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('getwms/', getwms, name='get_wms'),
     path('identify/', identify,name='identify'),
-    # path('search/', search,name='search'),
+    path('search/', search,name='search'),
     # path('getdrawings/', getDrawings, name='getdrawings'),
     # path('synctodb/', syncToDatabase, name='synctodb'),
     # path('exportshp/', exportSHP, name='exportshp'),

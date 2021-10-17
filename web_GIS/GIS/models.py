@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.contrib.gis.db import models
 
 class Layer(models.Model):
     layer_name = models.CharField(max_length=50)
@@ -13,10 +13,9 @@ class Layer(models.Model):
         return f'{self.layer_alias} : {self.workspace} : {self.layer_name} : {self.server_address}'
 
 
-# class Drawing(models.Model):
-#     geomId = models.AutoField(primary_key=True)
-#     geom = models.GeometryField()
-#     userOwner = models.ManyToManyField(User)
-#
-#     def __str__(self):
-#         return str(self.geom)
+class Drawing(models.Model):
+    geom = models.GeometryField()
+    userOwner = models.ManyToManyField(User)
+
+    def __str__(self):
+        return str(self.geom)

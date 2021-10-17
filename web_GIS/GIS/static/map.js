@@ -32,7 +32,7 @@
                 map.addLayer(wms)
             }
 
-	    }
+	    },
     });
 
     map.setCenter([0,0],1)
